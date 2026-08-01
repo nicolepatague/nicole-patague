@@ -33,3 +33,11 @@ bullet phrasing; verified nothing was invented.
 ---
 
 *Future stages: add each new prompt below as the project continues.*
+
+## Stage 1 — Executive Memo
+
+**Prompt:**
+
+> Draft a 300–400 word CFO memo using the decision-memo template for my FX hedging scenario: US tech services firm, EUR 12,500,000 receivable due in 1 year, indicative forward 1.0910. Cover the exposure, the USD risk of an adverse move, three hedge families (forward, money market, option) with honest pros/cons, and the Stage 2–5 roadmap.
+
+**What I edited:** Reworded sections in my own voice, checked the numbers against my scenario parameters, and finalized before committing.
