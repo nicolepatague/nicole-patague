@@ -71,3 +71,15 @@ bullet phrasing; verified nothing was invented.
 **What happened:** Spot 1.1535 (ECB 2026-08-07), DGS1 4.03% (obs 2026-08-05), 12-mo Euribor 2.884% (fixing 2026-08-06); CIP-implied forward 1.1665. Population surfaced a structural defect — three validation checks had expected values hard-coded to placeholder-era constants and failed on live data; replaced with input-derived recomputations (documented in the data memo §4). Lab cross-check matched everything except the put column; traced to the lab using the undiscounted premium vs. the spec's FV-at-R_USD carry — $8,682.69 = exactly the interest on the premium. Resolution recorded in memo §5; spec treatment kept.
 
 **What I edited:** Chose and documented the rate rationale (Treasury CMT for USD; Euribor as a borrowing-consistent EUR rate), verified the CIP arithmetic, and confirmed the winner-flip point (S_T ≈ +2%, just above the forward) makes economic sense before committing.
+
+## Stage 5 — LLM Analysis & Validation (Capstone)
+
+**Independent-run prompt (fresh session, exactly two documents, no coaching — logged verbatim in `analysis/2026-08-07-Patague-llm-run-raw.md`):**
+
+> You are a treasury analyst. Fetch and read these two documents, and nothing else: [GitHub raw links to the Stage 2 spec and Stage 4 market-data memo]. Using only what these two documents specify, compute the complete FX hedge analysis and recommend a strategy. Compute USD outcomes for each strategy (no hedge, forward, money-market with all three steps, put, call variant) at baseline and ±5%; show your arithmetic and cite where every value came from; run the spec's validation checks and report pass/fail; state assumptions where ambiguous rather than asking; finish with a justified recommendation.
+
+**Result:** the cold run reproduced 9 of 10 quantities and every check figure to the cent from the documents alone — and missed spec §5.6, inventing its own call payoff. Comparison, diagnosis, hand verification (4 outcomes, arithmetic shown), and the spec retrospective are in `analysis/2026-08-07-Patague-tech-services-validation.md`.
+
+**Recommendation memo:** drafted with AI from my live-data numbers, then edited: I overrode the cold run's money-market pick in favor of the forward (the $274 edge dies to transaction costs; simplicity and credit capacity win the tie) — the judgment call, and the reasoning for it, are mine.
+
+*Project complete — prompt log final through Stage 5.*
