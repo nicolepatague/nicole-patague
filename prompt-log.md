@@ -51,3 +51,13 @@ bullet phrasing; verified nothing was invented.
 **Iteration (gap found → fix):** The template's legacy calculation flow uses the textbook 1-year `(1 + r)` form with a single `BASIS` range, and the first draft carried that into §4/§5 — conflicting with the Stage 2 requirement to state the rate basis explicitly. I had the AI restate every growth factor as `1 + r × T_DAYS/360` (ACT/360, both legs), add ACT/360 to each rate row in §2, and then re-derive parity-consistent placeholder rates (S0 = 1.0700, R_USD = 4.00%, R_FC = 2.00%) so the §7 parity check actually passes: F_implied = 1.09127 vs. F0 = 1.0910; MM vs. forward gap = $3,325 (0.024%, inside the 0.05% tolerance).
 
 **What I edited:** Trimmed template sections outside the required eight to hold 2–3 pages; verified all ten standard names appear exactly; confirmed §5 contains zero cell addresses; check figures V1–V10 were recomputed in Python rather than trusting the AI's arithmetic.
+
+## Stage 3 — AI-Assisted Build + Audit
+
+**Prompt:**
+
+> Build the FX hedge workbook from my committed Stage 2 spec (docs/specs/2026-08-07-Patague-tech-services-spec.md), exactly as written: 8-tab architecture, the ten named ranges attached to the Inputs cells, every calculated cell a formula in named-range notation, MM hedge in three visible steps, formula-driven ±5% sensitivity grid with chart, and the §7 validation checks computed live with PASS/FAIL verdicts. The spec goes in as-is — no re-explaining in chat.
+
+**Audit process:** Recalculated every formula (LibreOffice), read computed values back against the spec's §7 check figures, and ran scripted scans of named-range attachments and cell data types. Full findings in `analysis/2026-08-07-Patague-build-audit.md` (2 found-and-fixed, 2 checked-and-confirmed).
+
+**Iteration (spec defect → fix):** The audit caught that spec v0.2 never specified the call payoff the build contract requires — the AI built exactly what the spec said, which is the point of the exercise. Fixed the spec (v0.3, §5.6), then regenerated the call block rather than patching ad hoc in chat. Also fixed two #VALUE! cells where documentation text starting with "=" was ingested as formulas. Each fix committed individually.
