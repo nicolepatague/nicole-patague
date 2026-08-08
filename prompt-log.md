@@ -61,3 +61,13 @@ bullet phrasing; verified nothing was invented.
 **Audit process:** Recalculated every formula (LibreOffice), read computed values back against the spec's §7 check figures, and ran scripted scans of named-range attachments and cell data types. Full findings in `analysis/2026-08-07-Patague-build-audit.md` (2 found-and-fixed, 2 checked-and-confirmed).
 
 **Iteration (spec defect → fix):** The audit caught that spec v0.2 never specified the call payoff the build contract requires — the AI built exactly what the spec said, which is the point of the exercise. Fixed the spec (v0.3, §5.6), then regenerated the call block rather than patching ad hoc in chat. Also fixed two #VALUE! cells where documentation text starting with "=" was ingested as formulas. Each fix committed individually.
+
+## Stage 4 — Market Data + Population
+
+**Prompt:**
+
+> Retrieve live inputs for my FX hedge model as of today (2026-08-07): EURUSD spot from the ECB reference fix, R_USD from FRED DGS1 (1-yr Treasury CMT), R_FC from the 12-mo Euribor fixing. Compute the CIP-implied 1-yr forward and compare it to my scenario's indicative 1.0910. Populate the workbook through the named-range input cells only, re-run all validation checks, and cross-check forward / MM / option outputs against the FX Hedging Lab.
+
+**What happened:** Spot 1.1535 (ECB 2026-08-07), DGS1 4.03% (obs 2026-08-05), 12-mo Euribor 2.884% (fixing 2026-08-06); CIP-implied forward 1.1665. Population surfaced a structural defect — three validation checks had expected values hard-coded to placeholder-era constants and failed on live data; replaced with input-derived recomputations (documented in the data memo §4). Lab cross-check matched everything except the put column; traced to the lab using the undiscounted premium vs. the spec's FV-at-R_USD carry — $8,682.69 = exactly the interest on the premium. Resolution recorded in memo §5; spec treatment kept.
+
+**What I edited:** Chose and documented the rate rationale (Treasury CMT for USD; Euribor as a borrowing-consistent EUR rate), verified the CIP arithmetic, and confirmed the winner-flip point (S_T ≈ +2%, just above the forward) makes economic sense before committing.
