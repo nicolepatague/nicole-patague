@@ -12,7 +12,7 @@
 |------|------|
 | **Created by** | Nicole Patague |
 | **Date Created** | 2026-08-07 |
-| **Version** | 0.2 |
+| **Version** | 0.3 |
 | **LLM Used** | Claude (drafter; author as editor — see `prompt-log.md`) |
 | **Role** | Treasury Analyst |
 | **Audience** | CFO / Director of Treasury |
@@ -82,6 +82,7 @@ Named-range notation only — no cell addresses. Each numbered step below is its
 1. `DF_USD = 1 + R_USD × T_DAYS/360` (growth factor)
 2. `DF_FC = 1 + R_FC × T_DAYS/360`
 3. `FV_PREM_PUT = PREM_PUT × FC_AMT × DF_USD` (premium cost at settlement)
+4. `FV_PREM_CALL = PREM_CALL × FC_AMT × DF_USD`
 
 ### 5.2 Forward hedge
 - `USD_FWD = FC_AMT × F0_in` — locked at t₀, invariant across the grid.
@@ -98,6 +99,10 @@ Named-range notation only — no cell addresses. Each numbered step below is its
 
 ### 5.5 No hedge
 - `USD_NO_HEDGE(S_T) = S_T × FC_AMT`.
+
+### 5.6 Call hedge (payable-side variant)
+- For each settlement spot `S_T`: `USD_CALL(S_T) = MIN(S_T, K_CALL) × FC_AMT + FV_PREM_CALL` — the USD outlay to obtain `FC_AMT` under a call hedge, capped at `K_CALL` plus the carried premium.
+- Included per the Stage 3 build contract (put **and** call payoffs); sign conventions per the template's payable variant (buy forward / borrow USD-invest FC / call on FC).
 
 ---
 
@@ -136,6 +141,7 @@ Named-range notation only — no cell addresses. Each numbered step below is its
 | `PARITY_GAP` | `USD_MM − USD_FWD`, $ and % | `MM_Hedge` |
 | `USD_FLOOR_PUT` | `MIN(USD_PUT)` across grid — worst case | `Opt_Hedge` |
 | `USD_BASE_PUT` | `USD_PUT` at `S_T = S0_in` | `Opt_Hedge` |
+| `USD_BASE_CALL` | `USD_CALL` at `S_T = S0_in` (payable variant) | `Opt_Hedge` |
 | `SENS_TABLE` | 11×6 sensitivity table (§6) | `Sensitivity` |
 | `SENS_CHART` | Four-series comparison line chart | `Sensitivity` |
 | `SUMMARY_TBL` | Per-strategy baseline proceeds + floor, executive at-a-glance | `Cover` |
@@ -150,3 +156,4 @@ All summary results are gray-filled cells named exactly as above; the Stage 3 gr
 |---------|------|--------|--------|
 | 0.1 | 2026-08-07 | N. Patague | Initial AI draft from template + scenario 3 |
 | 0.2 | 2026-08-07 | N. Patague | Fixed rate basis to ACT/360 on both legs; re-derived parity-consistent placeholder rates; added check figures V1–V10 |
+| 0.3 | 2026-08-07 | N. Patague | Stage 3 audit: added §5.6 call payoff (spec omitted it; build contract requires put and call) and `USD_BASE_CALL` output |
