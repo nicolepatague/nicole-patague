@@ -83,3 +83,7 @@ bullet phrasing; verified nothing was invented.
 **Recommendation memo:** drafted with AI from my live-data numbers, then edited: I overrode the cold run's money-market pick in favor of the forward (the $274 edge dies to transaction costs; simplicity and credit capacity win the tie) — the judgment call, and the reasoning for it, are mine.
 
 *Project complete — prompt log final through Stage 5.*
+
+## Post-review revisions (Stage 2–5 Treasury PRs, 2026-08-10)
+
+Read all four instructor reviews, stress-tested the Stage 5 critique, and accepted it: the §C "certainty is unusually cheap" framing conflated the CIP rate-differential premium with the price of hedging — revised to state the premium is arbitrage-free compensation, not evidence of timing (memo v1.1). Also fixed the §E unit garble and relabeled the $943,750 as a spot-move variance the lock banks rather than earns. Added MIT LICENSE (repo-polish gap). Re-ran the formulas-only scan post-population per the Stage 3 review: 160 calculated cells, zero hardcoded values. Replies posted in each PR thread.

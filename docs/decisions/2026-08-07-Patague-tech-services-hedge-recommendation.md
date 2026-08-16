@@ -4,7 +4,7 @@
 **From:** Nicole Patague, Treasury Analyst
 **Date:** 2026-08-07
 **Re:** Recommended hedge for the EUR 12,500,000 receivable settling 2027-08-07
-**Version:** 1.0 · **LLM Used:** Claude (drafter; author as editor — see `prompt-log.md`)
+**Version:** 1.1 — post-review revisions per `docs/reviews/2026-08-09-stage5-treasury-review.md` · **LLM Used:** Claude (drafter; author as editor — see `prompt-log.md`)
 **Basis:** live market data of 2026-08-07 (`data/2026-08-07-Patague-market-data.md`); model validated by hand and by independent LLM run (`analysis/2026-08-07-Patague-tech-services-validation.md`)
 
 ---
@@ -25,7 +25,7 @@ We are owed EUR 12,500,000 in one year from European services contracts. At toda
 
 ## C · Sensitivity interpretation
 
-Under **EUR depreciation**, the forward/MM lock preserves $883,438–$883,712 versus unhedged at the −5% point; the put preserves $499,755. Under **EUR appreciation**, unhedged overtakes the lock only above 1.16652 (+1.13% from here), and the put needs more than +2.66% (above 1.18422) before it beats the lock — its premium is, in effect, a bet on a further euro rally on top of one that has already happened. The choice is between three shapes: the diagonal (full exposure), the flat line (certainty), and the hockey stick (a floor, for a fee). With the forward already locking a rate *above* today's spot, certainty here is unusually cheap: we give up only the upside beyond +1.13%.
+Under **EUR depreciation**, the forward/MM lock preserves $883,438–$883,712 versus unhedged at the −5% point; the put preserves $499,755. Under **EUR appreciation**, unhedged overtakes the lock only above 1.16652 (+1.13% from here), and the put needs more than +2.66% (above 1.18422) before it beats the lock — its premium is, in effect, a bet on a further euro rally on top of one that has already happened. The choice is between three shapes: the diagonal (full exposure), the flat line (certainty), and the hockey stick (a floor, for a fee). One caution on reading the forward's premium over spot: it reflects the USD–EUR rate differential under covered interest parity — arbitrage-free compensation that exists whenever USD rates exceed EUR rates — and is not evidence that hedging is cheap or well-timed. The case for the lock rests on the exposure and our objective, not on the carry.
 
 ## D · Recommendation
 
@@ -35,7 +35,7 @@ The money-market hedge is economically identical (+$274 on paper) but that edge 
 
 ## E · Executive justification
 
-**Budget certainty:** the forward fixes FY-27 revenue from this contract at $14.58M — $943,750 better than plan — removing FX from the forecast entirely. **Cash flow & liquidity:** no upfront cash (vs. $212,500 premium today for the put), no draw on borrowing lines (vs. the MM hedge), one instrument with one settlement. **Optionality forgone:** we surrender gains beyond 1.1665; given the objective set in our framing memo — protect USD value, not speculate — that is the point of the hedge, not a defect. **Cost:** zero premium; the implicit cost is the upside beyond +1.13%, which we consider well exchanged for a locked nine-figure-basis-point gain over plan. Hedge-accounting treatment (cash-flow hedge designation under ASC 815) is available for a plain forward and can be confirmed with the auditors before execution.
+**Budget certainty:** the forward fixes FY-27 revenue from this contract at $14.58M — $943,750 above plan, a variance produced by the euro's 8% rally since the planning rate was set, which the lock *banks* rather than earns — and removes FX from the forecast entirely. **Cash flow & liquidity:** no upfront cash (vs. $212,500 premium today for the put), no draw on borrowing lines (vs. the MM hedge), one instrument with one settlement. **Optionality forgone:** we surrender gains beyond 1.1665; given the objective set in our framing memo — protect USD value, not speculate — that is the point of the hedge, not a defect. **Cost:** zero premium; the implicit cost is the upside beyond +1.13%, which we consider well exchanged for locking the rally's windfall into the budget. Hedge-accounting treatment (cash-flow hedge designation under ASC 815) is available for a plain forward and can be confirmed with the auditors before execution.
 
 **Requesting approval to execute the forward this week while the 1.1665 level holds.**
 
